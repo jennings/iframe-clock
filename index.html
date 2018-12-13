@@ -41,10 +41,11 @@
                 tz: "UTC",
                 format: "h:mm a",
             }
-            var query = Object.fromEntries(
+            var query = fromEntries(
                 location.search.replace(/^\?/, "")
                 .split("&")
                 .map(p => p.split("=", 2))
+                .map(([key, value]) => [key, decodeURIComponent(value)])
             )
             var settings = { ...defaults, ...query }
 
@@ -58,6 +59,13 @@
             function updateClockDisplay() {
                 var time = moment().tz(settings.tz)
                 clock.innerText = time.format(settings.format)
+            }
+
+            function fromEntries(entries) {
+                const obj = {};
+                for (const [key, value] of entries) {
+                    obj[key] = value;
+                }
             }
         </script>
     </body>

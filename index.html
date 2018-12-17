@@ -54,7 +54,7 @@
             var subtitle = document.getElementById("subtitle")
             subtitle.innerText = settings.tz
 
-            setTimeout(updateClockDisplay, settings.seconds ? 1000 : 10000)
+            setInterval(updateClockDisplay, settings.seconds ? 1000 : 10000)
             updateClockDisplay()
 
             function updateClockDisplay() {
